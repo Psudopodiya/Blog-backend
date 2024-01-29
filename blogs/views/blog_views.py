@@ -15,7 +15,6 @@ def blog_list(request):
     blogs = Blog.objects.all()
     serializer = BlogSerializer(blogs, many=True)
     blogs_list = serializer.data
-    print(blogs_list)
     return Response(blogs_list, status=status.HTTP_200_OK)
 
 

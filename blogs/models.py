@@ -4,6 +4,7 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     birthdate = models.DateField(null=True, blank=True)
+    profile_image = models.ImageField(null=True, blank=True, upload_to='profile_images/')
 
 
 class Blog(models.Model):

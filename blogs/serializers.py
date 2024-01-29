@@ -16,8 +16,17 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return user
 
 
+class UserProfileSerializer(serializers.ModelSerializer):
+    profile_image = serializers.ImageField(use_url=True, required=False, allow_null=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'username', 'email', 'birthdate', 'profile_image')
+        extra_kwargs = {'password': {'write_only': True, 'required': False}}
+
+
 class BlogSerializer(serializers.ModelSerializer):
-    feature_image = serializers.ImageField(allow_null=True)
+    feature_image = serializers.ImageField(allow_null=True, required=False)
 
     class Meta:
         model = Blog

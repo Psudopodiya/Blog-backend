@@ -17,7 +17,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
-    feature_image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
+    cover_image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
     upvote_count = models.IntegerField(default=0)
     like_count = models.IntegerField(default=0)
 

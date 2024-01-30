@@ -21,16 +21,16 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'email', 'birthdate', 'profile_image')
+        fields = ('username', 'email', 'birthdate', 'profile_image')
         extra_kwargs = {'password': {'write_only': True, 'required': False}}
 
 
 class BlogSerializer(serializers.ModelSerializer):
-    feature_image = serializers.ImageField(allow_null=True, required=False)
+    cover_image = serializers.ImageField(allow_null=True, required=False)
 
     class Meta:
         model = Blog
-        fields = ['title', 'content', 'category', 'feature_image', 'author', 'upvote_count', 'like_count']
+        fields = ['title', 'content', 'category', 'cover_image', 'author', 'upvote_count', 'like_count']
 
 
 class CommentSerializer(serializers.ModelSerializer):

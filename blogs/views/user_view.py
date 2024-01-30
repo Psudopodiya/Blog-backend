@@ -44,6 +44,7 @@ def profile(request):
     user = request.user
     if request.method == 'GET':
         serializer = UserProfileSerializer(user)
+        print("GET: ", serializer.data)
         return Response(serializer.data)
 
     elif request.method == 'PATCH':
@@ -54,5 +55,6 @@ def profile(request):
         # Performing updates
         if serializer.is_valid():
             serializer.save()
+            print("POST: ",serializer.data)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

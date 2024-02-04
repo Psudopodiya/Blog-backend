@@ -16,12 +16,17 @@ def login(request):
     if token_serializer.is_valid():
         tokens = token_serializer.validated_data
         user = get_object_or_404(CustomUser, username=request.data.get('username'))
+
+        profile_image_url = None
+        if user.profile_image and hasattr(user.profile_image, 'url'):
+            profile_image_url = user.profile_image.url
         response_data = {
             "access_token": tokens['access'],
             "refresh_token": tokens['refresh'],
             "user": {
                 'username': user.username,
                 'email': user.email,
+                'profile_image': profile_image_url,
             }
         }
         return Response(response_data, status=status.HTTP_200_OK)
@@ -44,7 +49,6 @@ def profile(request):
     user = request.user
     if request.method == 'GET':
         serializer = UserProfileSerializer(user)
-        print("GET: ", serializer.data)
         return Response(serializer.data)
 
     elif request.method == 'PATCH':
@@ -55,6 +59,5 @@ def profile(request):
         # Performing updates
         if serializer.is_valid():
             serializer.save()
-            print("POST: ",serializer.data)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

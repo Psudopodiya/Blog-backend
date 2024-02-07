@@ -10,5 +10,6 @@ urlpatterns = [
 
     # BLOGS
     path('', blog_views.blog_list, name='blog-list'),
-    path('create_blog', blog_views.create_blog, name='create-blog')
+    path('create_blog', blog_views.create_blog, name='create-blog'),
+    path('blog/<int:pk>', blog_views.detail_blog , name='blog-detail'),
 ]

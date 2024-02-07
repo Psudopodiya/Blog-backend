@@ -26,10 +26,19 @@ def create_blog(request):
     author_id = get_object_or_404(CustomUser, username=username).id
     data['author'] = author_id
     serializer = BlogSerializer(data = data)
+    print(serializer)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def detail_blog(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    serializer = BlogSerializer(blog)
+    print(blog)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST','DELETE'])
 def manage_blog(request):

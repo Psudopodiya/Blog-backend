@@ -30,7 +30,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ['title', 'content', 'category', 'cover_image', 'author', 'upvote_count', 'like_count']
+        fields = ['title', 'content', 'category', 'cover_image', 'author', 'upvote_count', 'like_count','pk']
 
 
 class CommentSerializer(serializers.ModelSerializer):
